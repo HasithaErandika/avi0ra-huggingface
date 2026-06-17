@@ -1,0 +1,17 @@
+[package]
+distribution = "2201.13.1"
+org = "avi0ra"
+name = "huggingface"
+version = "@toml.version@"
+license = ["Apache-2.0"]
+authors = ["Hasitha Erandika"]
+keywords = ["huggingface", "ai", "llm", "inference", "machine-learning", "nlp"]
+icon = "../docs/icon.png"
+repository = "https://github.com/HasithaErandika/module-ballerinax-huggingface"
+readme = "Package.md"
+
+[build-options]
+observabilityIncluded = true
+
+[platform.java21]
+graalvmCompatible = true
