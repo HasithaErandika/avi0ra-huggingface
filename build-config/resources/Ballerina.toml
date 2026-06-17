@@ -7,7 +7,7 @@ license = ["Apache-2.0"]
 authors = ["Hasitha Erandika"]
 keywords = ["huggingface", "ai", "llm", "inference", "machine-learning", "nlp"]
 
-repository = "https://github.com/HasithaErandika/aviora-huggingface"
+repository = "https://github.com/HasithaErandika/avi0ra-huggingface"
 
 [build-options]
 observabilityIncluded = true
