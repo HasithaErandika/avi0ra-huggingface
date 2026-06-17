@@ -1,6 +1,6 @@
 # Examples
 
-The `avi0ra/huggingface` connector examples demonstrate usage of the OpenAPI-generated client against the Hugging Face Inference API.
+The `avi0ra/huggingface` connector examples demonstrate usage of the OpenAPI-generated client against the Hugging Face TGI API.
 
 Each example is a separate Ballerina package with its own `Ballerina.toml`, `main.bal`, and configuration.
 
@@ -13,7 +13,7 @@ Each example is a separate Ballerina package with its own `Ballerina.toml`, `mai
 Set your token in `Config.toml`:
 
 ```toml
-HF_TOKEN = "<YOUR_HF_TOKEN>"
+token = "<YOUR_HF_TOKEN>"
 ```
 
 ## Running an example

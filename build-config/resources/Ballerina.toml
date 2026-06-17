@@ -1,14 +1,13 @@
 [package]
-distribution = "2201.13.1"
+distribution = "2201.13.4"
 org = "avi0ra"
 name = "huggingface"
 version = "@toml.version@"
 license = ["Apache-2.0"]
 authors = ["Hasitha Erandika"]
 keywords = ["huggingface", "ai", "llm", "inference", "machine-learning", "nlp"]
-icon = "../docs/icon.png"
-repository = "https://github.com/HasithaErandika/module-ballerinax-huggingface"
-readme = "Package.md"
+
+repository = "https://github.com/HasithaErandika/aviora-huggingface"
 
 [build-options]
 observabilityIncluded = true

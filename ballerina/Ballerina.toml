@@ -1,13 +1,13 @@
 [package]
-distribution = "2201.13.1"
+distribution = "2201.13.4"
 org = "avi0ra"
 name = "huggingface"
-version = "1.1.0"
+version = "1.1.1"
 license = ["Apache-2.0"]
 authors = ["Hasitha Erandika"]
 keywords = ["huggingface", "ai", "llm", "inference", "machine-learning", "nlp", "rag", "streaming"]
 icon = "../docs/icon.png"
-repository = "https://github.com/HasithaErandika/module-ballerinax-huggingface"
+repository = "https://github.com/HasithaErandika/aviora-huggingface"
 readme = "Package.md"
 
 [build-options]

@@ -79,14 +79,14 @@ publishing {
         }
     }
     repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/ballerina-platform/module-${packageOrg}-${packageName}")
-            credentials {
-                username = System.getenv("publishUser")
-                password = System.getenv("publishPAT")
-            }
-        }
+maven {
+             name = "GitHubPackages"
+             url = uri("https://maven.pkg.github.com/HasithaErandika/aviora-huggingface")
+             credentials {
+                 username = System.getenv("publishUser")
+                 password = System.getenv("publishPAT")
+             }
+         }
     }
 }
 

@@ -1,28 +1,105 @@
-_Author_: Hasitha Erandika \
-_Created_: 2026-06-03 \
-_Updated_: 2026-06-03 \
-_Edition_: Swan Lake
+# Hugging Face Connector for Ballerina
 
-# Sanitation for OpenAPI specification
+Connects Ballerina applications to the [Hugging Face Inference API](https://huggingface.co/docs/inference-providers) via the router at `https://router.huggingface.co`.
 
-This document records the sanitation done on top of the Hugging Face Inference API OpenAPI specification used to generate the Ballerina client.
+This package provides a type-safe, OpenAPI-generated `Client` with strongly-typed request and response records for core inference operations.
 
-**Source:** Curated OpenAPI definition aligned with the [Hugging Face Inference Providers](https://huggingface.co/docs/inference-providers) router API at `https://router.huggingface.co`.
+---
 
-## Sanitation changes
+## Supported operations
 
-1. **Server URL** — Set to `https://router.huggingface.co` (current Inference Providers router base URL).
-2. **Path prefix** — Prefixed all model inference paths with `/hf-inference` (e.g. `/models/{model}/summarization` → `/hf-inference/models/{model}/summarization`) to match the live router API.
-3. **Scope** — Initial connector scope covers core stable endpoints: chat completion, text generation, classification, embeddings, summarization, translation, zero-shot classification, question answering, text-to-image, image classification, and automatic speech recognition. Additional endpoints (streaming, fill-mask, sentence-similarity, text-to-speech, image-to-text, batch) will be added as they are confirmed in the official OpenAPI specification.
-4. **Schema naming** — Applied `x-ballerina-name` extensions for snake_case JSON fields (`summary_text`, `generated_text`, etc.) before alignment.
+| Operation | Resource path | Example model |
+|---|---|---|
+| Chat completion | `/v1/chat/completions` | `Qwen/Qwen2.5-7B-Instruct` |
+| Text generation | `/hf-inference/models/{model}` | `openai-community/gpt2` |
+| Text classification | `/hf-inference/models/{model}/text-classification` | `distilbert-base-uncased-finetuned-sst-2-english` |
+| Token classification (NER) | `/hf-inference/models/{model}/token-classification` | `dslim/bert-base-NER` |
+| Feature extraction (embeddings) | `/hf-inference/models/{model}/feature-extraction` | `sentence-transformers/all-MiniLM-L6-v2` |
+| Question answering | `/hf-inference/models/{model}/question-answering` | `deepset/roberta-base-squad2` |
+| Summarization | `/hf-inference/models/{model}/summarization` | `facebook/bart-large-cnn` |
+| Translation | `/hf-inference/models/{model}/translation` | `Helsinki-NLP/opus-mt-en-fr` |
+| Zero-shot classification | `/hf-inference/models/{model}/zero-shot-classification` | `facebook/bart-large-mnli` |
+| Text-to-image | `/hf-inference/models/{model}/text-to-image` | `black-forest-labs/FLUX.1-schnell` |
+| Image classification | `/hf-inference/models/{model}/image-classification` | `google/vit-base-patch16-224` |
+| Automatic speech recognition | `/hf-inference/models/{model}/automatic-speech-recognition` | `openai/whisper-large-v3-turbo` |
 
-## OpenAPI CLI commands
+---
 
-The following commands were used to generate the Ballerina client from the repository root:
+## Setup
 
-```bash
-bal openapi flatten -i docs/spec/openapi.yaml -o docs/spec
-bal openapi align -i docs/spec/flattened_openapi.yaml -o docs/spec
-# Replace docs/spec/openapi.yaml with aligned_ballerina_openapi.yaml
-bal openapi -i docs/spec/openapi.yaml --mode client -o ballerina
+1. Create a free account at [Hugging Face](https://huggingface.co/join).
+2. Generate an access token at [Settings → Access Tokens](https://huggingface.co/settings/tokens).
+3. Add the dependency:
+
+```toml
+[dependencies]
+avi0ra/huggingface = "1.1.0"
 ```
+
+4. Import and initialize the client:
+
+```ballerina
+import avi0ra/huggingface;
+
+public function main() returns error? {
+    huggingface:Client hf = check new ({auth: {token: "<HF_TOKEN>"}});
+    // Use resource methods on the client
+}
+```
+
+---
+
+## Quickstart
+
+### Chat completion
+
+```ballerina
+import avi0ra/huggingface;
+
+public function main() returns error? {
+    huggingface:Client hf = check new ({auth: {token: "<HF_TOKEN>"}});
+
+    huggingface:ChatCompletionResponse resp = check hf->/v1/chat/completions.post({
+        model: "Qwen/Qwen2.5-7B-Instruct",
+        messages: [{role: "user", content: "Hello!"}],
+        maxTokens: 100
+    });
+
+    huggingface:ChatCompletionChoice[] choices = resp.choices ?: [];
+    if choices.length() > 0 {
+        io:println(choices[0].message?.content ?: "");
+    }
+}
+```
+
+### Summarization
+
+```ballerina
+string modelId = "facebook/bart-large-cnn";
+huggingface:SummarizationResult[] results = check hf->/hf-inference/models/[modelId]/summarization.post({
+    inputs: "Long article text here...",
+    parameters: {maxLength: 130, minLength: 30}
+});
+io:println(results[0].summaryText ?: "");
+```
+
+### Feature extraction (embeddings)
+
+```ballerina
+string modelId = "sentence-transformers/all-MiniLM-L6-v2";
+float[][] embeddings = check hf->/hf-inference/models/[modelId]/feature-extraction.post({
+    inputs: "Hello world"
+});
+```
+
+---
+
+## Examples
+
+See the [examples directory](https://github.com/HasithaErandika/module-ballerinax-huggingface/tree/main/examples) for additional use cases.
+
+---
+
+## Client generation
+
+The client is generated from the OpenAPI specification in `docs/spec/openapi.yaml` using the Ballerina OpenAPI tool. See `docs/spec/sanitations.md` for spec modifications and regeneration commands.

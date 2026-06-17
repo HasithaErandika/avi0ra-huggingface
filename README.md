@@ -1,8 +1,8 @@
 # Ballerina HuggingFace Connector
 
-[![Build](https://github.com/HasithaErandika/module-ballerinax-huggingface/actions/workflows/ci.yml/badge.svg)](https://github.com/HasithaErandika/module-ballerinax-huggingface/actions/workflows/ci.yml)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/HasithaErandika/module-ballerinax-huggingface.svg)](https://github.com/HasithaErandika/module-ballerinax-huggingface/commits/main)
-[![GitHub Issues](https://img.shields.io/github/issues/HasithaErandika/module-ballerinax-huggingface.svg?label=Open%20Issues)](https://github.com/HasithaErandika/module-ballerinax-huggingface/issues)
+[![Build](https://github.com/HasithaErandika/aviora-huggingface/actions/workflows/ci.yml/badge.svg)](https://github.com/HasithaErandika/aviora-huggingface/actions/workflows/ci.yml)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/HasithaErandika/aviora-huggingface.svg)](https://github.com/HasithaErandika/aviora-huggingface/commits/main)
+[![GitHub Issues](https://img.shields.io/github/issues/HasithaErandika/aviora-huggingface.svg?label=Open%20Issues)](https://github.com/HasithaErandika/aviora-huggingface/issues)
 
 ## Overview
 
@@ -24,15 +24,15 @@ See [`ballerina/Package.md`](ballerina/Package.md) for the full operation table 
 1. Create a free account at [Hugging Face](https://huggingface.co/join).
 2. Go to your [Access Tokens page](https://huggingface.co/settings/tokens).
 
-   ![Hugging Face access tokens page](https://raw.githubusercontent.com/HasithaErandika/module-ballerinax-huggingface/main/docs/setup-huggingface/get-token.png)
+![Hugging Face access tokens page](https://raw.githubusercontent.com/HasithaErandika/aviora-huggingface/main/docs/setup-huggingface/get-token.png)
 
 3. Click **New token**, choose **Fine-grained**, and enable the **Inference Providers** permission. Copy this token.
 
-   ![Create fine-grained token](https://raw.githubusercontent.com/HasithaErandika/module-ballerinax-huggingface/main/docs/setup-huggingface/type_fine-grained.png)
+    ![Create fine-grained token](https://raw.githubusercontent.com/HasithaErandika/aviora-huggingface/main/docs/setup-huggingface/type_fine-grained.png)
 
-   or else, choose **Type == Read**
+    or else, choose **Type == Read**
 
-   ![Create read token](https://raw.githubusercontent.com/HasithaErandika/module-ballerinax-huggingface/main/docs/setup-huggingface/type_read.png)
+    ![Create read token](https://raw.githubusercontent.com/HasithaErandika/aviora-huggingface/main/docs/setup-huggingface/type_read.png)
 
 4. Add the connector to your Ballerina project:
 
@@ -104,11 +104,11 @@ See [`docs/spec/sanitations.md`](docs/spec/sanitations.md) for spec modification
 
 1. Clone the repository and build the package:
 
-   ```bash
-   git clone https://github.com/HasithaErandika/module-ballerinax-huggingface.git
-   cd module-ballerinax-huggingface/ballerina
-   bal build
-   ```
+```bash
+    git clone https://github.com/HasithaErandika/aviora-huggingface.git
+    cd aviora-huggingface/ballerina
+    bal build
+    ```
 
 2. Run unit tests (no token required):
 

@@ -21,7 +21,7 @@ jobs:
       - name: Set up Ballerina
         uses: ballerina-platform/setup-ballerina@v1
         with:
-          version: 2201.13.1
+          version: 2201.13.4
 
       - name: Build
         run: |
